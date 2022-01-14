@@ -1,9 +1,10 @@
 <?php
 session_start();
-error_reporting(0);
+// error_reporting(0);
     include 'connection.php';
     // include 'login.php';
     $name=$_SESSION["username"];
+    session_unset();
     
 ?>
 <!DOCTYPE html>
