@@ -133,7 +133,7 @@ error_reporting(0);
     <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         <ul>
-            <li><a href="home.html" class="navlink">Home</a></li>
+            <li><a href="admin.php" class="navlink">Home</a></li>
             <li>&nbsp; &nbsp;</li>
             <li><a href="about.html" class="navlink">About us</a></li>
             <li>&nbsp; &nbsp;</li>
@@ -152,7 +152,7 @@ error_reporting(0);
     
         <?php
           
-          echo "<center><h2> WELCOME $name</h2></center>";
+          echo "<center><h2> WELCOME Admin</h2></center>";
           
 
 

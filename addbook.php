@@ -102,12 +102,12 @@ error_reporting(0);
             background-image: url(main.jpg);
         }
 
-        a {
+        /* a {
             color: #92badd;
             display: inline-block;
             text-decoration: none;
             font-weight: 400;
-        }
+        } */
 
         h2 {
             text-align: center;
@@ -427,7 +427,7 @@ error_reporting(0);
 <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         <ul>
-            <li><a href="home.php" class="navlink">Home</a></li>
+            <li><a href="admin.php" class="navlink">Home</a></li>
             <li>&nbsp; &nbsp;</li>
             <li><a href="about.html" class="navlink">About us</a></li>
             <li>&nbsp; &nbsp;</li>
