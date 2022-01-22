@@ -1,9 +1,8 @@
 <?php
     include "connection.php";
     session_start();
-   $k=0;
-    $_SESSION['bookid']=$id;
-    
+    error_reporting(0);  
+    $name=$_SESSION['username'];
 ?>
 
 
@@ -134,6 +133,9 @@
             text-decoration: none;
             top :150px;        
         }
+        .bname{
+            visibility: hidden;
+        }
        
 
     </style>
@@ -158,37 +160,31 @@
     <div class="gap"></div>
     <h2 class="buy">Buy Books</h2>
     <div>
-        <?php
-        $sql="select * from books";
-        $result= mysqli_query($conn,$sql);
-        
-        while ($row=mysqli_fetch_assoc($result)){
-            $i=3;
-            echo '
-
-            
-            <form class="book" action="transaction.php" method="post">
+       <?php
+        $sql="select * from books where bookid not in (select bid from userbooks where uid =(select uid from users where username='$name')); ";
+        $query=mysqli_query($conn,$sql);
+        while($row=mysqli_fetch_assoc($query)){
+            echo'
+            <div  class="book">
             <div class="imag"></div>
-                <div class="bookinfo">
-                    <h1 class="bookname" name="bname">'.$row['bname']. '</h1>
-                    
-                    <h2 class="bookname"> RS  '.$row['price'].'</h2>
-                    <h2 class="bookname">Rating :'.$row['rating'].'</h2> 
-                    <h2 class="bookname">Author: '.$row['author'].'</h2>
-                    <h2 class="bookname">Publisher: '.$row['publisher'].'</h2>
-                    <input type="submit" name="'.$i.'" value="Buy">
-
-                </div>
-            </form>';
-
-            $i=$i+1;
-            $_SESSION["i"]=$i; 
-            
-
-        }
+            <form class ="bookinfo" action="transaction.php" method="POST">
+                <p class="bookname">'.$row['bname'].'</p>
+                <p class="bookname">Price: '.$row['price'].'</p>
+                <p class="bookname">Category: '.$row['category'].'</p>
+                <p class="bookname">Rating: '.$row['rating'].'</p>
+                <p class="bookname">ategory'.$row['bnmae'].'</p>
+                <p class="bookname">By : '.$row['author'].'</p>
+                <p class="bookname">Published By: '.$row['publisher'].'</p>
+                <input type="text" class="bname" name="bname" value="'.$row['bname'].'">
+                <input type="submit" class="buybtn" name="buybtn" value="BUY">
+                
         
-                ?>
-            
+        
+            </form>
+            </div>
+            ';
+        }
+       ?>
     </div>
 </body>
 </html>

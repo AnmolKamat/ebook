@@ -4,7 +4,7 @@ session_start();
     include 'connection.php';
     // include 'login.php';
     $name=$_SESSION["username"];
-    session_unset();
+    
     
 ?>
 <!DOCTYPE html>

@@ -1,18 +1,17 @@
 <?php
     include "connection.php";
     session_start();
-    error_reporting(0);
-    $count=$_SESSION["count"];
-    session_unset();
-    for($i=3;$i<=$count;$i++){
-    if (isset($_POST[$i])){
-        $bid=$i;
+    $uname=$_SESSION['username'];
+    $bname=$_POST['bname'];
+    $mot=$_POST['mot'];
+
+    $sql="select * from books;";
+    $query=mysqli_query($conn,$sql);
+    while($row=mysqli_fetch_assoc($query)){
+        if ($bname==$row['bname']) $bid=$row['bid'];
+        $price=$row['price'];
     }
-    }
-   
-    var_dump($bid);
-    die;
-    ?>
+        ?>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +31,9 @@
         }
         p{
             size: 200px;
+        }
+        .bookname{
+            font-size: 30px;
         }
         
         .nav {
@@ -83,7 +85,7 @@
             border-color: black;
         }
         .main{
-            height: 600px;
+            height: 400px;
             width: 600px;
             border-radius: 20px;
             margin-left: 620px;
@@ -95,6 +97,43 @@
         }
         .main_head{
             color: black;
+        }
+        .bookname{
+            display: block;
+        }
+        
+        select{
+            display: block;
+        }
+        .btn {
+        background: #49b4fc;
+        background-image: -webkit-linear-gradient(top, #49b4fc, #0084d6);
+        background-image: -moz-linear-gradient(top, #49b4fc, #0084d6);
+        background-image: -ms-linear-gradient(top, #49b4fc, #0084d6);
+        background-image: -o-linear-gradient(top, #49b4fc, #0084d6);
+        background-image: linear-gradient(to bottom, #49b4fc, #0084d6);
+        -webkit-border-radius: 16;
+        -moz-border-radius: 16;
+        border-radius: 16px;
+        -webkit-box-shadow: 3px 6px 7px #666666;
+        -moz-box-shadow: 3px 6px 7px #666666;
+        box-shadow: 3px 6px 7px #666666;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 31px;
+        padding: 10px 20px 10px 20px;
+        text-decoration: none;
+        margin-top: 100px;
+        }
+
+        .btn:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+        text-decoration: none;
         }
     </style>
 </head>
@@ -117,8 +156,18 @@
     </div>
     <div class="gap"></div>
     <div class="main">
+        <form action="transaction.php" method="post" class="form">
         <center><h1 class="main_head">Buy book</h1></center>
-        <p><?php echo $bname?></p>
+        <center><p class="bookname">Book:<?php echo $bname?></p></center>
+        <center><select name="mot"  class="select" style="width:200px;" >
+            <option value="none">------</option>
+            <option value="upi">UPI</option>
+            <option value="debit">Debit Card</option>
+            <option value="credit">Credit Card</option>
+            <option value="net">Net Banking</option>
+        </select></center>
+        <center><input type="submit" value="buy" name="buybtn" class="btn"></center>
+        </form>
     </div>
 </body>
 </html>
