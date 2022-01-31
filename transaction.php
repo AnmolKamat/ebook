@@ -1,17 +1,55 @@
 <?php
     include "connection.php";
+    if (isset($_POST['buybtn']))
+    {
+
+    
     session_start();
     $uname=$_SESSION['username'];
     $bname=$_POST['bname'];
-    $mot=$_POST['mot'];
-
+    
+    
     $sql="select * from books;";
     $query=mysqli_query($conn,$sql);
-    while($row=mysqli_fetch_assoc($query)){
-        if ($bname==$row['bname']) $bid=$row['bid'];
-        $price=$row['price'];
+    while($row=mysqli_fetch_assoc($query))
+    {
+        if ($row['bname']==$bname) 
+        {
+            $bid=$row['bookid'];
+            $price=$row['price'];
+        }
     }
-        ?>
+    $_SESSION['bid']=$bid;
+    $_SESSION['price']=$price;
+    // $bookid=(int) $bid;
+    // $totalamt=(int) $price;
+
+    $sql0="select * from users;";
+    $query0=mysqli_query($conn,$sql0);
+    while($row0=mysqli_fetch_assoc($query0)){
+        if($uname==$row0['username'])
+            $uid=$row0['id'];
+    }
+    $_SESSION['uid']=$uid;
+
+}
+    if(isset($_POST['bbtn']))
+    {
+        session_start();
+        $bid=$_SESSION['bid'];
+        $price=$_SESSION['price'];
+        $tid=rand(100,1000);
+        $date=date("Y/m/d");
+        $uid=$_SESSION['uid'];
+        $mot=filter_input(INPUT_POST, 'mot', FILTER_SANITIZE_STRING);
+        $sql1="insert into transaction values('$tid','$mot','$date','$price')";
+        $query1=mysqli_query($conn,$sql1);
+        $sql2="insert into orders values('$uid','$bid','$tid','$date')";
+        $query2=mysqli_query($conn,$sql2);
+        $sql3="insert into userbooks values('$uid','$bid')";
+        $query3=mysqli_query($conn,$sql3);
+        }
+  ?>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -166,8 +204,10 @@
             <option value="credit">Credit Card</option>
             <option value="net">Net Banking</option>
         </select></center>
-        <center><input type="submit" value="buy" name="buybtn" class="btn"></center>
+        <center><input type="submit" value="buy" name="bbtn" class="btn"></center>
         </form>
     </div>
+    
+
 </body>
 </html>

@@ -126,11 +126,14 @@ session_start();
             background-color: black;
             color: white;
         }
+
        
     </style>
 </head>
 
 <body>
+
+    
     <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         <ul>
@@ -167,6 +170,7 @@ session_start();
         </div>
 
     </div>
+    
 </body>
 
 </html>
