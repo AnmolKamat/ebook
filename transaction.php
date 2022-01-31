@@ -1,5 +1,6 @@
 <?php
     include "connection.php";
+    error_reporting(0);
     if (isset($_POST['buybtn']))
     {
 
@@ -48,6 +49,7 @@
         $query2=mysqli_query($conn,$sql2);
         $sql3="insert into userbooks values('$uid','$bid')";
         $query3=mysqli_query($conn,$sql3);
+        $msg=1;
         }
   ?>
     
@@ -57,7 +59,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <title>Transaction</title>
     <!-- css -->
     <style>
         body {
@@ -173,6 +184,9 @@
         background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
         text-decoration: none;
         }
+        .status{
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -180,7 +194,7 @@
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         
         <ul>
-            <li><a href="home.php" class="navlink">Home</a></li>
+            <li><a href="ebook.php" class="navlink">Home</a></li>
             <li>&nbsp; &nbsp;</li>
             <li><a href="about.html" class="navlink">About us</a></li>
             <li>&nbsp; &nbsp;</li>
@@ -205,6 +219,7 @@
             <option value="net">Net Banking</option>
         </select></center>
         <center><input type="submit" value="buy" name="bbtn" class="btn"></center>
+        <center><h2 class="status"><?php if ($msg==1) echo 'Book Bought successfully '?></h2></center>
         </form>
     </div>
     

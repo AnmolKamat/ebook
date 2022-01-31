@@ -22,7 +22,7 @@ error_reporting(0);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>ADMIN</title>
 
     <!-- css -->
 

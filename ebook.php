@@ -1,9 +1,15 @@
 <?php
-    include "connection.php";
-    error_reporting(0);
+session_start();
+// error_reporting(0);
+    include 'connection.php';
+    // include 'login.php';
+    $name=$_SESSION["username"];
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,8 +23,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
-    <title>ALL BOOKS</title>
-    <!-- css  -->
+    <title>home</title>
+
+    <!-- css -->
+
     <style>
         body {
             margin: 0;
@@ -29,10 +37,6 @@
         }
         p{
             size: 20px;
-            margin: 0;
-            font-family: 'Heebo', sans-serif;
-            font-family: 'Quicksand', sans-serif;
-            display: inline;
         }
         #logout{
             visibility: hidden;
@@ -40,7 +44,7 @@
         
         .nav {
             display: flex;
-            position: fixed;
+            position: absolute;
             background: rgb(179, 179, 186);
             background: linear-gradient(90deg, rgba(179, 179, 186, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(44, 51, 54, 0.2945553221288515) 100%);
             top: -20px;
@@ -85,33 +89,55 @@
             background-color: black;
             border-color: black;
         }
-        .books{
+        
+        .main {
+             
             display: flex;
-            justify-content: space-evenly;
-            margin: 10px auto;
-            left: 87px;
-            width: 90%;
-            height: 40px;  
-            background: rgba(255, 255, 255, 0.767);        
+            background: rgba(255, 255, 255, 0.767); 
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            margin: auto;
+            top: 200px;
+            left: 600px;
+            width: 30%;
+            height: 300px;
             border: solid none;
             border-radius: 20px;
+        }
+        
+        .mainbtn{
+            display: flex;
+            color: #141414;
+            font-family: 'Heebo', sans-serif;
+            font-family: 'Quicksand', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+            border: static none;
+            padding: 20px;
+            background-color:#98989e;
+            width: 90%;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .mainbtn:hover{
+            background-color: black;
+            color: white;
+        }
 
-        }
-        .gap{
-            height: 100px;
-            margin-top: 50px;
-
-        }
-        .bookinfo{
-            margin-top: 8px;
-        }
+       
     </style>
 </head>
+
 <body>
-<div class="nav">
+
+    
+    <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         <ul>
-            <li><a href="admin.php" class="navlink">Home</a></li>
+            <li><a href="home.html" class="navlink">Home</a></li>
             <li>&nbsp; &nbsp;</li>
             <li><a href="about.html" class="navlink">About us</a></li>
             <li>&nbsp; &nbsp;</li>
@@ -119,23 +145,32 @@
             <li>&nbsp; &nbsp;</li>
             <li><a href="login.php" class="navlink" >Logout</a></li>
             <li>&nbsp;&nbsp;</li>
-        
+
 
         </ul>
+
     </div>
-    <div class ="gap">
-        <center><h1>All Books</h1></center>
+    <div class="main">
+
+    
+    
+        <?php
+          
+          echo "<center><h2> WELCOME $name</h2></center>";
+          
+
+
+        ?>
+       
+        <a href="Buybook.php" class="mainbtn">BuyBook</a>
+        <a href="Viewbook.php" class="mainbtn">View Books</a>  
+        <a href="orders.php" class="mainbtn">My orders</a>
+        
+          
+        </div>
+
     </div>
-    <?php
-        $sql="select * from books;";
-        $query=mysqli_query($conn,$sql);
-        while ($row=mysqli_fetch_assoc($query)){
-            echo '
-                <div class="books">
-                <p class="bookinfo">'.$row['bookid'].'</p>
-                <p class="bookinfo">'.$row['bname'].'</p>
-                </div>';
-        }
-    ?>
+    
 </body>
+
 </html>

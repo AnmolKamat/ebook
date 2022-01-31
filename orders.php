@@ -1,6 +1,15 @@
 <?php
-    include "connection.php";
+    include 'connection.php';
     error_reporting(0);
+    session_start();
+    $uname=$_SESSION['username'];
+    $sql="select * from users";
+    $query=mysqli_query($conn,$sql);
+    while($row=mysqli_fetch_assoc($query))
+    {
+        if ($uname==$row['username']) $uid=$row['id'];
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +26,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
-    <title>ALL BOOKS</title>
-    <!-- css  -->
+    <title>My Orders</title>
     <style>
         body {
             margin: 0;
@@ -29,10 +37,6 @@
         }
         p{
             size: 20px;
-            margin: 0;
-            font-family: 'Heebo', sans-serif;
-            font-family: 'Quicksand', sans-serif;
-            display: inline;
         }
         #logout{
             visibility: hidden;
@@ -40,7 +44,7 @@
         
         .nav {
             display: flex;
-            position: fixed;
+            position: absolute;
             background: rgb(179, 179, 186);
             background: linear-gradient(90deg, rgba(179, 179, 186, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(44, 51, 54, 0.2945553221288515) 100%);
             top: -20px;
@@ -55,7 +59,7 @@
             color: aliceblue;
         }
         
-        ul {
+        .navlist{
             position: absolute;
             top: 15px;
             left: 1350px;
@@ -85,33 +89,58 @@
             background-color: black;
             border-color: black;
         }
-        .books{
-            display: flex;
-            justify-content: space-evenly;
-            margin: 10px auto;
-            left: 87px;
-            width: 90%;
-            height: 40px;  
-            background: rgba(255, 255, 255, 0.767);        
-            border: solid none;
-            border-radius: 20px;
-
+        h2{
+            color:white;
         }
         .gap{
             height: 100px;
-            margin-top: 50px;
+        }
+        .books{
+            background:  rgba(255, 247, 251, 0.67);
+            height: 50px;
+            width: 85%;
+            margin: auto;
+            border: solid none;
+            border-radius: 15px;
 
         }
-        .bookinfo{
-            margin-top: 8px;
+        .head{
+            background:rgba(255, 255, 255, 0.767);
+            height: 50px;
+            width: 85%;
+            margin: auto;
+            border: solid none;
+            border-radius: 15px;
         }
+        .headlist{
+            display: flex;
+            justify-content: space-between;
+        }
+        .headname{
+            margin-right: 50px;
+            margin-top: 10px;
+            font-family: 'Heebo', sans-serif;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 20px;
+
+        }
+        .booklist{
+            display: flex;
+            justify-content: space-between;
+        }
+        .bookname{
+            margin-right: 50px;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
     </style>
 </head>
 <body>
 <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
-        <ul>
-            <li><a href="admin.php" class="navlink">Home</a></li>
+        <ul class="navlist">
+            <li><a href="ebook.php" class="navlink">Home</a></li>
             <li>&nbsp; &nbsp;</li>
             <li><a href="about.html" class="navlink">About us</a></li>
             <li>&nbsp; &nbsp;</li>
@@ -119,23 +148,43 @@
             <li>&nbsp; &nbsp;</li>
             <li><a href="login.php" class="navlink" >Logout</a></li>
             <li>&nbsp;&nbsp;</li>
-        
+
 
         </ul>
+
     </div>
-    <div class ="gap">
-        <center><h1>All Books</h1></center>
-    </div>
-    <?php
-        $sql="select * from books;";
-        $query=mysqli_query($conn,$sql);
-        while ($row=mysqli_fetch_assoc($query)){
-            echo '
+    <div class ="gap"></div>
+    <center><h2>My Orders</h2></center>
+    <div class="main" >
+        <div class="head">
+            <ul class="headlist">
+                <li class="headname">Book</li>
+                <li class="headname">Transaction ID</li>
+                <li class="headname">Date</li>
+                
+            </ul>
+        </div>
+        <?php
+            $sql="select b.bname,o.tid,o.date from orders o,books b where o.uid='$uid' and o.bid=b.bookid ";
+            $query=mysqli_query($conn,$sql);
+            while($row=mysqli_fetch_assoc($query))
+            {
+            
+                echo '
                 <div class="books">
-                <p class="bookinfo">'.$row['bookid'].'</p>
-                <p class="bookinfo">'.$row['bname'].'</p>
-                </div>';
-        }
-    ?>
+                    <ul class="booklist">
+                        <li class="bookname">'.$row['bname'].'</li>
+                        <li class="bookname">'.$row['tid'].'</li>
+                        <li class="bookname">'.$row['date'].'</li>
+                    </ul>
+    
+                </div>
+                ';
+            }
+        ?>
+        
+        
+    </div>
+     
 </body>
 </html>

@@ -1,5 +1,12 @@
 <?php
     include "connection.php";
+    session_start();
+    $uname=$_SESSION['username'];
+    $sql="select * from users";
+    $query=mysqli_query($conn,$sql);
+    while($row=mysqli_fetch_assoc($query)){
+        if ($uname==$row['username']) $uid=$row['id'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +14,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <title>View Books</title>
     <style>
        
         body {
@@ -84,7 +100,7 @@
             width: 90%;
             border: solid none;
             border-color: none;
-            height: 200px;
+            height: 250px;
             border-radius: 20px;
         }
         
@@ -134,7 +150,7 @@
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         
         <ul>
-            <li><a href="home.php" class="navlink">Home</a></li>
+            <li><a href="ebook.php" class="navlink">Home</a></li>
             <li>&nbsp; &nbsp;</li>
             <li><a href="about.html" class="navlink">About us</a></li>
             <li>&nbsp; &nbsp;</li>
@@ -150,7 +166,7 @@
     <h2 class="buy">View Books</h2>
     <div>
         <?php
-        $sql="select * from books";
+        $sql="select * from books b,userbooks u where u.uid='$uid' and u.bid=b.bookid";
         $result= mysqli_query($conn,$sql);
         
         while ($row=mysqli_fetch_assoc($result)){
@@ -168,7 +184,8 @@
                     <h2 class="bookname">Author: '.$row['author'].'</h2>
                     <h2 class="bookname">Publisher: '.$row['publisher'].'</h2>
                     <h2 class="bookname">Category: '.$row['category'].'</h2>
- 
+                    <a href="'.$row['url'].'" class="navlink" > View Book</a>
+
                 </div>
             </form>';
         }

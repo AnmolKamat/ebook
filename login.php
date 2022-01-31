@@ -10,7 +10,7 @@
     $sql ="select * from users";
     $result=mysqli_query($conn,$sql);
     $error="";
-    $url="home.php";
+    $url="ebook.php";
     if (mysqli_num_rows($result)>0)
     {
         if($email=='admin@ebook.com' && $password=='admin')
@@ -55,7 +55,16 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+        <title>LOGIN</title>
 
         <!-- css -->
         <style>
@@ -74,6 +83,11 @@
                     margin: 0%;
                     position: relative;
                     background-image: url(main.jpg);
+                }
+                h1{
+                    font-family: 'Heebo', sans-serif;
+                    font-family: 'Quicksand', sans-serif;
+                    color: white;
                 }
 
                 a {
@@ -396,7 +410,8 @@
                     .header {
                         height: 80px;
                         width: 100%;
-                        background-color: white;
+                        background: rgb(179, 179, 186);
+                        background: linear-gradient(90deg, rgba(179, 179, 186, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(44, 51, 54, 0.2945553221288515) 100%);
                         position: absolute;
                         top: -20px;
                     }
