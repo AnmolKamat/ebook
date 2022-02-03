@@ -137,7 +137,7 @@
             height: 400px;
             width: 600px;
             border-radius: 20px;
-            margin-left: 620px;
+            margin-left: 570px;
             
             background-color: rgba(255, 255, 255, 0.767);
         }
@@ -187,6 +187,27 @@
         .status{
             font-size: 20px;
         }
+        h2{
+            font-family: 'Heebo', sans-serif;
+            font-family: 'Quicksand', sans-serif; 
+            color: white;
+        }
+        .back{
+            display: block;
+            padding: 8px;
+            color: black;
+            width: 50px;
+            background-color: white;
+            border: 1px solid;
+            border-radius: 2px;
+            border-color: white;
+            text-decoration: none;
+        }
+        .back:hover{
+            color: white;
+            background-color: black;
+            border-color: black;
+        }
     </style>
 </head>
 <body>
@@ -207,6 +228,8 @@
         </ul>
     </div>
     <div class="gap"></div>
+    <a href="BuyBook.php" class="back">Back</a>
+    <center><h2>Transaction Page</h2></center>
     <div class="main">
         <form action="transaction.php" method="post" class="form">
         <center><h1 class="main_head">Buy book</h1></center>

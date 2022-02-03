@@ -22,10 +22,7 @@
     <style>
         body {
             margin: 0;
-            background-image: url("main.jpg");
-            background-repeat: no-repeat;
-            background-size: 100%;
-            position: relative;
+            
         }
         p{
             size: 20px;
@@ -90,11 +87,12 @@
             justify-content: space-evenly;
             margin: 10px auto;
             left: 87px;
-            width: 90%;
+            width: 1600px;
             height: 40px;  
             background: rgba(255, 255, 255, 0.767);        
             border: solid none;
             border-radius: 20px;
+            z-index: -20;
 
         }
         .gap{
@@ -105,9 +103,19 @@
         .bookinfo{
             margin-top: 8px;
         }
+        .bgimg{
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            object-fit:fill;
+            z-index: -50;
+       }
     </style>
 </head>
 <body>
+<img src="main.jpg" alt="bgimage" class="bgimg">
 <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         <ul>

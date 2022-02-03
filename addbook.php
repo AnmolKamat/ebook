@@ -1,6 +1,11 @@
 <?php
 error_reporting(0);
     include "connection.php";
+    
+    if (isset($_POST['addbtn']))
+    {
+
+    
     $bname=$_POST['bname'];
     $price=$_POST['price'];
     $author=$_POST['author'];
@@ -9,18 +14,14 @@ error_reporting(0);
     $category=$_POST['category'];
     $url=$_POST['url'];
     $status="";
-    if (isset($_POST['addbtn']))
-
+    // $sql="insert into books values(NULL,'$bname','$author','$publisher','$rating','$price','$category','$url')";
+    $sql="INSERT INTO `books`( `bname`, `author`, `publisher`, `rating`, `price`, `category`, `url`) VALUES ('$bname','$author','$publisher','$rating','$price','$category','$url')";
     
-    {
-        $sql="insert into books values(NULL,'$bname','$author','$publisher','$rating','$price','$category','$url')";
-        $res=mysqli_query($conn,$sql);
-       
-    }
-    if($res){
+    if (mysqli_query($conn,$sql)){
         $status="Book Added Successfully";
     }
-    
+    }
+   
 
 ?>
 <!DOCTYPE html>
@@ -471,7 +472,9 @@ error_reporting(0);
             <input type="text" id="url" class="fadeIn third" name="url" placeholder="Url"required>
             <input type="submit" class="fadeIn fourth" value="Add Book" id="reg_user" name="addbtn">
         </form>
-        <p><?php echo $status; $status="";?></p>
+        <p><?php echo $status; $status="";
+             
+        ?></p>
     </div>
     </div>
 </body>

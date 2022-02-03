@@ -30,9 +30,18 @@
             margin: 0;
             background-image: url("main.jpg");
             background-repeat: no-repeat;
-            background-size: 100%;
-            position: relative;
+            background-size:stretch;
+            
         }
+        .bgimg{
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            object-fit:fill;
+            z-index: -50;
+       }
         p{
             size: 200px;
         }
@@ -44,6 +53,7 @@
             background: linear-gradient(90deg, rgba(179, 179, 186, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(44, 51, 54, 0.2945553221288515) 100%);
             top: -20px;
             width: 100%;
+            z-index: 100;
             justify-content: space-between;
         }
         
@@ -97,11 +107,12 @@
         .book {
             margin: 2px auto 2px auto;
             background: rgba(255, 255, 255, 0.767);
-            width: 90%;
+            width: 1600px;
             border: solid none;
             border-color: none;
             height: 250px;
             border-radius: 20px;
+            z-index: -20;
         }
         
         .imag {
@@ -132,20 +143,29 @@
         .checked {
         color: orange;
         }
-        .buybtn{
-            position: absolute;
-            padding:8px;
-            background-color:#ff8960;
-            border: solid #ff8960;
+        .viewbtn{
+            display: block;
+            padding: 8px;
+            width:100px;
             color: black;
-            border-radius: 10px;
+            background-color: white;
+            border: 1px solid;
+            border-radius: 2px;
+            border-color: white;
             text-decoration: none;
-            top :150px;        
         }
+        .viewbtn:hover{
+            color: white;
+            background-color: black;
+            border-color: black;
+        }
+        
        
     </style>
 </head>
 <body >
+<img src="main.jpg" alt="bgimage" class="bgimg">
+
 <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         
@@ -164,6 +184,7 @@
     </div>
     <div class="gap"></div>
     <h2 class="buy">View Books</h2>
+  
     <div>
         <?php
         $sql="select * from books b,userbooks u where u.uid='$uid' and u.bid=b.bookid";
@@ -184,7 +205,7 @@
                     <h2 class="bookname">Author: '.$row['author'].'</h2>
                     <h2 class="bookname">Publisher: '.$row['publisher'].'</h2>
                     <h2 class="bookname">Category: '.$row['category'].'</h2>
-                    <a href="'.$row['url'].'" class="navlink" > View Book</a>
+                    <a href="'.$row['url'].'" class="viewbtn" > View Book</a>
 
                 </div>
             </form>';

@@ -3,6 +3,7 @@
     session_start();
     error_reporting(0);  
     $name=$_SESSION['username'];
+
 ?>
 
 
@@ -22,19 +23,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Quicksand&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <title>BUY BOOK</title>
 
     <!-- css -->
     <style>
         body {
             margin: 0;
-            background-image: url("main.jpg");
-            background-repeat: no-repeat;
-            background-size: 100%;
-            position: relative;
+            
         }
         p{
             size: 200px;
+            font-family: 'Oswald', sans-serif;  
         }
         
         .nav {
@@ -44,6 +46,7 @@
             background: linear-gradient(90deg, rgba(179, 179, 186, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(44, 51, 54, 0.2945553221288515) 100%);
             top: -20px;
             width: 100%;
+            z-index: 100;
             justify-content: space-between;
         }
         
@@ -97,11 +100,12 @@
         .book {
             margin: 2px auto 2px auto;
             background: rgba(255, 255, 255, 0.767);
-            width: 90%;
+            width: 1700px;
             border: solid none;
             border-color: none;
             height: 200px;
             border-radius: 20px;
+            z-index: -20;
         }
         
         .imag {
@@ -140,16 +144,26 @@
             color: black;
             border-radius: 10px;
             text-decoration: none;
-            top :150px;        
+            top :150px; 
+            margin-left: 300px;       
         }
         .bname{
             visibility: hidden;
         }
-       
+       .bgimg{
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            object-fit:fill;
+            z-index: -50;
+       }
 
     </style>
 </head>
 <body>
+    <img src="main.jpg" alt="bgimage" class="bgimg">
      <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         
@@ -168,11 +182,13 @@
     </div>
     <div class="gap"></div>
     <h2 class="buy">Buy Books</h2>
-    <div>
+    <div class="main">
        <?php
-        $sql="select * from books where bookid not in (select bid from userbooks where uid =(select uid from users where username='$name')); ";
+        $sql="select * from books where bookid not in (select bid from userbooks where uid = (select uid from users where username='$name'));";
         $query=mysqli_query($conn,$sql);
-        while($row=mysqli_fetch_assoc($query)){
+        while($row=mysqli_fetch_assoc($query))
+        {
+            
             echo'
             <div  class="book">
             <div class="imag"></div>

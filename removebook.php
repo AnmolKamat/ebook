@@ -1,5 +1,6 @@
 <?php
     include "connection.php";
+    error_reporting(0);
     $bid=$_POST['bid'];
     $status="";
     $sql="delete from books where bookid='$bid';";

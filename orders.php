@@ -33,7 +33,7 @@
             background-image: url("main.jpg");
             background-repeat: no-repeat;
             background-size: 100%;
-            position: relative;
+            
         }
         p{
             size: 20px;
@@ -132,11 +132,24 @@
             margin-right: 50px;
             margin-top: 10px;
             font-size: 20px;
+           
+            
         }
+        .bgimg{
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            object-fit:fill;
+            z-index: -50;
+       }
+       
 
     </style>
 </head>
 <body>
+<img src="main.jpg" alt="bgimage" class="bgimg">
 <div class="nav">
         <h1>EBOOK MANAGEMENT SYSTEM</h1>
         <ul class="navlist">
