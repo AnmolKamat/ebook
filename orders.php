@@ -180,9 +180,10 @@
         <?php
             $sql="select b.bname,o.tid,o.date from orders o,books b where o.uid='$uid' and o.bid=b.bookid ";
             $query=mysqli_query($conn,$sql);
+            if (mysqli_num_rows($query)>0)
+            { 
             while($row=mysqli_fetch_assoc($query))
-            {
-            
+            {   
                 echo '
                 <div class="books">
                     <ul class="booklist">
@@ -193,6 +194,10 @@
     
                 </div>
                 ';
+                }
+            }
+            else{
+                echo "<center><h1>No orders</h1></center>";
             }
         ?>
         

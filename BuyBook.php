@@ -184,7 +184,7 @@
     <h2 class="buy">Buy Books</h2>
     <div class="main">
        <?php
-        $sql="select * from books where bookid not in (select bid from userbooks where uid = (select uid from users where username='$name'));";
+        $sql="select * from books where bookid not in (select bid from userbooks where uid = (select id from users where username='$name'));";
         $query=mysqli_query($conn,$sql);
         while($row=mysqli_fetch_assoc($query))
         {

@@ -189,27 +189,37 @@
         <?php
         $sql="select * from books b,userbooks u where u.uid='$uid' and u.bid=b.bookid";
         $result= mysqli_query($conn,$sql);
+        if(mysqli_num_rows($result)>0)
+        {
+
         
-        while ($row=mysqli_fetch_assoc($result)){
-            $i=1;
-            echo '
+            while ($row=mysqli_fetch_assoc($result))
+            {
+                $i=1;
+                echo '
 
-            
-            <form class="book" action="transaction.php" method="post">
-            <div class="imag"></div>
-                <div class="bookinfo">
-                    <h1 class="bookname" name="bname">'.$row['bname']. '</h1>
-                    
-                    <h2 class="bookname"> RS  '.$row['price'].'</h2>
-                    <h2 class="bookname">Rating :'.$row['rating'].'</h2> 
-                    <h2 class="bookname">Author: '.$row['author'].'</h2>
-                    <h2 class="bookname">Publisher: '.$row['publisher'].'</h2>
-                    <h2 class="bookname">Category: '.$row['category'].'</h2>
-                    <a href="'.$row['url'].'" class="viewbtn" > View Book</a>
+                
+                <form class="book" action="transaction.php" method="post">
+                <div class="imag"></div>
+                    <div class="bookinfo">
+                        <h1 class="bookname" name="bname">'.$row['bname']. '</h1>
+                        
+                        <h2 class="bookname"> RS  '.$row['price'].'</h2>
+                        <h2 class="bookname">Rating :'.$row['rating'].'</h2> 
+                        <h2 class="bookname">Author: '.$row['author'].'</h2>
+                        <h2 class="bookname">Publisher: '.$row['publisher'].'</h2>
+                        <h2 class="bookname">Category: '.$row['category'].'</h2>
+                        <a href="'.$row['url'].'" class="viewbtn" > View Book</a>
 
-                </div>
-            </form>';
+                    </div>
+                </form>';
+            }
         }
+        else
+        {
+            echo "<center><h1>No books to show</center></h1>";
+        }
+        
             ?>
     </div>
         </div>
